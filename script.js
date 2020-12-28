@@ -1,21 +1,21 @@
 // Assignment Code
 var lcLetters = "abcdefghijklmnopqrstuvwxyz";
-// var ucLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var numerics = "0123456789";
 var specials = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-// var allChars = [lcLetters, ucLetters, numerics, specials];
+var userChoices = [];
 
-// alert(allChars[Math.floor(Math.random()*allChars.length)][Math.floor(Math.random()*33)]);
+alert("Get ready for your random password!");
+
+userChoices.push(prompt("How long do you want your password to be? You can choose between 8 and 128 characters."));
+userChoices.push(confirm("Do you want lowercase letters?"));
+userChoices.push(confirm("Do you want uppercase letters?"));
+userChoices.push(confirm("Do you want numbers?"));
+userChoices.push(confirm("Do you want special characters?"));
 
 var randLow = lcLetters[Math.floor(Math.random()*lcLetters.length)];
 var randUp = lcLetters[Math.floor(Math.random()*lcLetters.length)].toUpperCase();
 var randNum = numerics[Math.floor(Math.random()*numerics.length)];
 var randSpec = specials[Math.floor(Math.random()*specials.length)];
-
-// alert(randLow);
-// alert(randUp);
-// alert(randNum);
-// alert(randSpec);
 
 var generateBtn = document.querySelector("#generate");
 
@@ -30,9 +30,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-alert("Get ready for your random password!");
-confirm("Do you want lowercase letters?");
-confirm("Do you want uppercase letters?");
-confirm("Do you want numbers?");
-confirm("Do you want special characters?");
