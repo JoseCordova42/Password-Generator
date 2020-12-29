@@ -4,13 +4,37 @@ var numerics = "0123456789";
 var specials = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 var userChoices = [];
 
-alert("Get ready for your random password!");
+console.log(userChoices);
 
-userChoices.push(prompt("How long do you want your password to be? You can choose between 8 and 128 characters."));
-userChoices.push(confirm("Do you want lowercase letters?"));
-userChoices.push(confirm("Do you want uppercase letters?"));
-userChoices.push(confirm("Do you want numbers?"));
-userChoices.push(confirm("Do you want special characters?"));
+function getPwLength () {
+  var length = prompt("How long do you want your password to be? You can choose between 8 and 128 characters.");
+  if (length < 8 || length > 128) {
+    alert("Must be between 8 and 128 characters!");
+    getPwLength();
+  } else {
+    userChoices.push(length)
+  }
+};
+getPwLength();
+
+function getChars () {
+  var low = confirm("Do you want lowercase letters?");
+  var upp = confirm("Do you want uppercase letters?");
+  var num = confirm("Do you want numbers?");
+  var spec = confirm("Do you want special characters?");
+  if (low === false && upp === false && num === false && spec === false) {
+    alert("Must choose at least one type of character!");
+    getChars();
+  } else {
+    userChoices.push(low)
+    userChoices.push(upp)
+    userChoices.push(num)
+    userChoices.push(spec)
+  }
+};
+getChars();
+
+console.log(userChoices);
 
 var randLow = lcLetters[Math.floor(Math.random()*lcLetters.length)];
 var randUp = lcLetters[Math.floor(Math.random()*lcLetters.length)].toUpperCase();
