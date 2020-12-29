@@ -4,18 +4,15 @@ var numerics = "0123456789";
 var specials = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 var userChoices = [];
 
-console.log(userChoices);
-
 function getPwLength () {
-  var length = prompt("How long do you want your password to be? You can choose between 8 and 128 characters.");
-  if (length < 8 || length > 128) {
+  var pwLength = prompt("How long do you want your password to be? You can choose between 8 and 128 characters.");
+  if (pwLength < 8 || pwLength > 128) {
     alert("Must be between 8 and 128 characters!");
     getPwLength();
   } else {
-    userChoices.push(length)
+    return pwLength;
   }
 };
-getPwLength();
 
 function getChars () {
   var low = confirm("Do you want lowercase letters?");
@@ -26,20 +23,55 @@ function getChars () {
     alert("Must choose at least one type of character!");
     getChars();
   } else {
-    userChoices.push(low)
-    userChoices.push(upp)
-    userChoices.push(num)
-    userChoices.push(spec)
+    if (low) {
+      userChoices.push("low")
+    }
+    if (upp) {
+      userChoices.push("upp")
+    }
+    if (num) {
+      userChoices.push("num")
+    }
+    if (spec) {
+      userChoices.push("spec")
+    }
   }
 };
-getChars();
 
-console.log(userChoices);
+function randLow () {
+  return lcLetters[Math.floor(Math.random()*lcLetters.length)].toLowerCase();
+};
 
-var randLow = lcLetters[Math.floor(Math.random()*lcLetters.length)];
-var randUp = lcLetters[Math.floor(Math.random()*lcLetters.length)].toUpperCase();
-var randNum = numerics[Math.floor(Math.random()*numerics.length)];
-var randSpec = specials[Math.floor(Math.random()*specials.length)];
+function randUp () {
+  return lcLetters[Math.floor(Math.random()*lcLetters.length)].toUpperCase();
+};
+
+function randNum () {
+  return numerics[Math.floor(Math.random()*numerics.length)];
+};
+
+function randSpec () {
+  return specials[Math.floor(Math.random()*specials.length)];
+};
+
+function generatePassword() {
+  var pwLength = getPwLength();
+  getChars();
+  var pwString = "";
+  for (var i = 0; i < pwLength; i++) {
+    var charOpts = userChoices[Math.floor(Math.random() * userChoices.length)];
+    if (charOpts === "low") {
+      pwString = pwString + randLow();
+    } else if (charOpts === "upp") {
+      pwString = pwString + randUp();
+    } else if (charOpts === "num") {
+      pwString = pwString + randNum();
+    } else if (charOpts === "spec") {
+      pwString = pwString + randSpec();
+    } 
+  }
+  return pwString;
+};
 
 var generateBtn = document.querySelector("#generate");
 
